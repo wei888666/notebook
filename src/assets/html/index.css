@@ -1,0 +1,122 @@
+html{
+  	margin:0 auto;
+    overflow:hidden;
+    height: 100%;	
+}
+.wrap{
+	position: relative;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	width: 300px;
+	height: 300px;
+	margin: auto;	
+}
+.cube{
+	width: 300px;
+	height: 300px;
+	margin: 0 auto;
+	transform-style: preserve-3d;
+	transform: rotateX(-30deg) rotateY(-80deg);
+	-webkit-animation: rotate 20s infinite;
+	animation-timing-function: linear;
+}
+@-webkit-keyframes rotate{
+	from{transform: rotateX(0deg) rotateY(0deg);}
+	to{transform: rotateX(360deg) rotateY(360deg);}
+}
+.cube div{
+	position: absolute;
+	width: 300px;
+	height: 300px;
+	opacity: 0.8;
+	transition: all .4s;
+}
+.pic{
+	width: 300px;
+	height: 300px;
+}
+.cube .out_front{
+	transform: rotateY(0deg) translateZ(150px);
+}
+.cube .out_back{
+	transform: translateZ(-150px) rotateY(180deg);
+}
+.cube .out_left{
+	transform: rotateY(90deg) translateZ(150px);
+}
+.cube .out_right{
+	transform: rotateY(-90deg) translateZ(150px);
+}
+.cube .out_top{
+	transform: rotateX(90deg) translateZ(150px);
+}
+.cube .out_bottom{
+	transform: rotateX(-90deg) translateZ(150px);
+}
+.cube span{
+	display: bloack;
+	width: 150px;
+	height: 150px;
+	position: absolute;
+	top: 75px;
+	left: 75px;
+}
+.cube .in_pic{
+	width: 150px;
+	height: 150px;
+}
+.cube .in_front{
+	transform: rotateY(0deg) translateZ(75px);
+}
+.cube .in_back{
+	transform: translateZ(-75px) rotateY(180deg);
+}
+.cube .in_left{
+	transform: rotateY(90deg) translateZ(75px);
+}
+.cube .in_right{
+	transform: rotateY(-90deg) translateZ(75px);
+}
+.cube .in_top{
+	transform: rotateX(90deg) translateZ(75px);
+}
+.cube .in_bottom{
+	transform: rotateX(-90deg) translateZ(75px);
+}
+.cube:hover .out_front{
+	transform: rotateY(0deg) translateZ(300px);
+}
+.cube:hover .out_back{
+	transform: translateZ(-300px) rotateY(180deg);
+}
+.cube:hover .out_left{
+	transform: rotateY(90deg) translateZ(300px);
+}
+.cube:hover .out_right{
+	transform: rotateY(-90deg) translateZ(300px);
+}
+.cube:hover .out_top{
+	transform: rotateX(90deg) translateZ(300px);
+}
+.cube:hover .out_bottom{
+	transform: rotateX(-90deg) translateZ(300px);
+}
+.canvaszz{
+  position:absolute;
+  width:100%;
+  height:100%;
+  z-index:-1;
+  filter:alpha(opacity=20);
+    opacity: 0.8;
+}
+.canvas {
+  position:absolute;
+  display:inline-block;
+  width:100%;
+  height:auto;
+  vertical-align:baseline;
+  z-index:-2;
+}
