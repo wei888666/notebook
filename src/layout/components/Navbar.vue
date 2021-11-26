@@ -5,7 +5,12 @@
                @toggleClick="toggleSideBar" />
 
     <breadcrumb class="breadcrumb-container" />
-
+    <div style="
+    line-height: 57px;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 20px;
+    float: left;"> {{datess}}</div>
     <div class="right-menu">
       <el-dropdown class="avatar-container"
                    trigger="click">
@@ -46,7 +51,50 @@ export default {
       'sidebar',
     ])
   },
+  data () {
+    return {
+      /** 333 在线时间 */
+      datess: "",
+      timer: null
+    }
+  },
+  created () {
+    this.datea();
+  },
   methods: {
+    /** 时钟 */
+    datea () {
+      this.timer = setInterval(() => {
+        let d = new Date();
+        let mathzero = num => (num < 10 ? "0" + num : num);
+        let wk = new Date().getDay();
+        let weeks = [
+          "星期日",
+          "星期一",
+          "星期二",
+          "星期三",
+          "星期四",
+          "星期五",
+          "星期六"
+        ];
+        let week = weeks[wk];
+        this.datess =
+          d.getFullYear() +
+          "年" +
+          mathzero(d.getMonth() + 1) +
+          "月" +
+          mathzero(d.getDate()) +
+          "日" +
+          " " +
+          week +
+          " " +
+          mathzero(d.getHours()) +
+          ":" +
+          mathzero(d.getMinutes()) +
+          ":" +
+          mathzero(d.getSeconds());
+      });
+    },
     toggleSideBar () {
       this.$store.dispatch('app/toggleSideBar')
     },
@@ -54,6 +102,10 @@ export default {
       await this.$store.dispatch('user/logout')
       this.$router.push(`/login?redirect=${this.$route.fullPath}`)
     }
+  },
+  beforeDestroy () {
+    clearInterval(this.timer);
+    this.timer = null;
   }
 }
 </script>
@@ -67,7 +119,7 @@ export default {
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
 
   .hamburger-container {
-    line-height: 46px;
+    line-height: 55px;
     height: 100%;
     float: left;
     cursor: pointer;

@@ -54,8 +54,6 @@ export default {
   methods: {
     /** 返回首页 */
     backHone () {
-      let view = this.$route;
-      this.$store.dispatch('tagsView/delView', view).then(({ visitedViews }) => { });
       this.$router.replace('/');
     }
   }

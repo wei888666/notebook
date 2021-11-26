@@ -9,11 +9,11 @@ export const constantRoutes = [
   {
     path: '/',
     component: Layout,
-    redirect: '/index',
+    redirect: '/home',
     children: [{
-      path: 'index',
+      path: 'home',
       name: 'Home',
-      component: () => import('@/views/index/index'),
+      component: () => import('@/views/home/index'),
       meta: { title: '首页', icon: 'dashboard' }
     }]
   },
@@ -80,7 +80,7 @@ export const constantRoutes = [
     component: Layout,
     children: [
       {
-        path: 'www.baidu.com',
+        path: 'https://www.baidu.com',
         meta: { title: '外链百度', icon: 'link' }
       }
     ]

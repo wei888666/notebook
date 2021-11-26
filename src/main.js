@@ -27,13 +27,22 @@ if (process.env.NODE_ENV === 'production') {
   const { mockXHR } = require('../mock')
   mockXHR()
 }
+/** 加載common.js方法 */
+import commonJs from './utils/common'
+Vue.use(commonJs)
 
 // set ElementUI lang to EN
-Vue.use(ElementUI, { locale })
+Vue.use(ElementUI, { size: 'mini' })
 // 如果想要中文版 element-ui，按如下方式声明
 // Vue.use(ElementUI)
 
 Vue.config.productionTip = false
+
+import Search from '@/components/Search'
+import Pagination from '@/components/Pagination'
+
+Vue.component('search', Search) /** 搜索模块组件 */
+Vue.component('Pagination', Pagination) /** 分页组件 */
 
 new Vue({
   el: '#app',

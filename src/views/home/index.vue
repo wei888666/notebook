@@ -8,18 +8,15 @@
       <p>return arr.filter(item = !res.has(item[val]) && res.set(item[val], 1))</p>
       <p> },</p>
       <p>let arr = this.unique(this.editParams.rules, 'ruleStart')</p>
-
     </div>
-
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Dashboard',
+  name: 'Home',
   data () {
     return {
-
     }
   }
 }

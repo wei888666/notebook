@@ -11,27 +11,19 @@
         <el-form ref="form"
                  @keyup.enter.native="seekFn"
                  label-position="top">
-          <el-form-item label="活动名称:">
+          <el-form-item label="名称:">
             <el-input v-model="seekFrom.couponNo"></el-input>
           </el-form-item>
-          <el-form-item label="上架状态:">
+          <el-form-item label="选择:">
             <el-select v-model="seekFrom.status"
                        placeholder=" ">
-              <el-option label="未上架"
-                         :value="0" />
               <el-option label="上架"
                          :value="1" />
               <el-option label="下架"
                          :value="2" />
             </el-select>
           </el-form-item>
-          <el-form-item label="购买SPU:">
-            <el-input v-model="seekFrom.couponName"></el-input>
-          </el-form-item>
-          <el-form-item label="赠送SPU:">
-            <el-input v-model="seekFrom.couponName"></el-input>
-          </el-form-item>
-          <el-form-item label="UTC活动时间"
+          <el-form-item label="时间"
                         prop="time">
             <el-date-picker type="datetimerange"
                             value-format="yyyy-MM-dd HH:mm:ss"
@@ -42,18 +34,6 @@
                             end-placeholder="结束时间">
             </el-date-picker>
           </el-form-item>
-          <el-form-item label="折扣类型:">
-            <el-select v-model="seekFrom.status"
-                       placeholder=" ">
-              <el-option label="未上架"
-                         :value="0" />
-              <el-option label="上架"
-                         :value="1" />
-              <el-option label="下架"
-                         :value="2" />
-            </el-select>
-          </el-form-item>
-
         </el-form>
       </template>
     </search>
@@ -71,48 +51,31 @@
                            fixed="left"
                            :index="index => {return (pageNum - 1) * pageSize + index + 1;}"
                            align="center"></el-table-column>
-          <el-table-column label="邮件名称"
+          <el-table-column label="名称1"
                            align="center"
-                           show-overflow-tooltip
                            prop="emailName"></el-table-column>
-          <el-table-column label="邮件主题"
+          <el-table-column label="名称2"
                            align="center"
                            show-overflow-tooltip
                            prop="emailThemeStr">
           </el-table-column>
           <el-table-column>
-            <template slot="header">闪购ID<br />批次号</template>
+            <template slot="header">名称3<br />名称4</template>
             <template slot-scope="{ row }">{{ row.id }}<br />{{ row.couponName }}</template>
           </el-table-column>
           <el-table-column label="操作"
                            fixed="right"
-                           width="120">
+                           width="100">
             <template slot-scope="{ row }">
               <a class="btn"
                  href="javascript:;"
                  title="编辑">
+                {{row.a}}
                 <svg aria-hidden="true"
                      class="icon svg-icon">
                   <use xlink:href="#icon-edit"></use>
                 </svg>
               </a>
-              <a class="btn"
-                 href="javascript:;"
-                 title="开启">
-                <svg aria-hidden="true"
-                     class="icon svg-icon">
-                  <use xlink:href="#icon-start"></use>
-                </svg>
-              </a>
-              <a class="btn"
-                 href="javascript:;"
-                 title="关闭">
-                <svg aria-hidden="true"
-                     class="icon svg-icon">
-                  <use xlink:href="#icon-disable"></use>
-                </svg>
-              </a>
-
             </template>
           </el-table-column>
         </el-table>
@@ -142,7 +105,7 @@
 
 <script>
 export default {
-  name: 'FullList',
+  name: 'Table',
   data () {
     return {
       popupType: false,/** 新增弹窗 */
@@ -167,7 +130,7 @@ export default {
     }
   },
   mounted () {
-
+    this.gainData()
   },
   methods: {
     /** 获取数据 */
@@ -182,23 +145,24 @@ export default {
         }
       })
         .then(ret => {
-          if (ret.code == 0) {
-            this.emptyText = "暂无数据~";
-            let { records } = ret.data.page;
-            this.titleData = ret.data;
-            this.tableData = records;
+          if (res.code == 0) {
+            this.emptyText = "暂无数据~"
+            let { records, total } = res.data
+            this.tableData = records || []
+            this.total = total || 0
           } else {
-            this.emptyText = ret.msg;
-            this.tableData = [];
+            this.emptyText = res.msg
+            this.tableData = []
+            this.total = 0
           }
         })
         .catch(err => {
-          this.emptyText = err.msg;
-          this.tableData = [];
+          this.emptyText = err.msg
+          this.tableData = []
+          this.total = 0
         })
         .finally(() => {
           this.loading = false;
-          this.tableDataOrigin = this.tableData;
         });
     },
     /** 分页 */
